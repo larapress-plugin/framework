@@ -115,6 +115,17 @@ class ThemeOptions
         });
     }
 
+    /**
+     *
+     * @param array|string $menus
+     */
+    public static function add_menu_page($menus)
+    {
+        foreach ($menus as $menu) {
+            AdminPage::register($menu['page_title'], $menu['menu_title'], $menu['capability'], $menu['menu_slug'], $menu['function'], $menu['icon_url'], $menu['position']);
+        }
+    }
+
     public static function remove_version($remove)
     {
         if ($remove) {
@@ -173,12 +184,12 @@ class ThemeOptions
     {
         foreach ($templates as $template) {
             if (isset($template['post'])) {
-                foreach ((array)$template['post'] as $post) {
+                foreach ((array) $template['post'] as $post) {
                     $post = $post instanceof Post ? $post : new Post($post);
                     add_filter("theme_{$post->post_type}_templates", function ($post_templates, $wp_theme, $post_being_edited) use ($template, $post) {
                         $post_being_edited = $post_being_edited ?? get_post();
-                        if ($post_being_edited instanceof WP_Post AND (int)$post_being_edited->ID === $post->id()) {
-                            $templateName                  = $templatePath = $template['name'];
+                        if ($post_being_edited instanceof WP_Post AND (int) $post_being_edited->ID === $post->id()) {
+                            $templateName                  = $templatePath                  = $template['name'];
                             $post_templates[$templatePath] = $templateName;
                         }
 
@@ -188,9 +199,9 @@ class ThemeOptions
             }
 
             if (isset($template['post_type'])) {
-                foreach ((array)$template['post_type'] as $post_type) {
+                foreach ((array) $template['post_type'] as $post_type) {
                     add_filter("theme_{$post_type}_templates", function ($post_templates) use ($template) {
-                        $templateName                  = $templatePath = $template['name'];
+                        $templateName                  = $templatePath                  = $template['name'];
                         $post_templates[$templatePath] = $templateName;
 
                         return $post_templates;
@@ -234,7 +245,7 @@ class ThemeOptions
                     }
 
                     if (is_callable($args['hook'])) {
-                        if ( ! call_user_func($args['hook'], $hook, get_current_screen())) {
+                        if (!call_user_func($args['hook'], $hook, get_current_screen())) {
                             continue;
                         }
                     } elseif ($args['hook'] !== $hook) {
@@ -247,7 +258,7 @@ class ThemeOptions
                     }
 
                     if ($optionName === 'scripts') {
-                        if ( ! isset($_args['dependencies'])) {
+                        if (!isset($_args['dependencies'])) {
                             $args['dependencies'] = $scriptDependencies;
                         }
                         wp_enqueue_script($args['name'], $args['src'], $args['dependencies'], $args['version'], $args['in_footer']);
