@@ -1,10 +1,11 @@
 {
-    "name": "laraish/framework",
-    "description": "The Laraish Framework for WordPress.",
+    "name": "larapress-plugin/framework",
+    "description": "The Larapress Plugin Framework for WordPress.",
     "keywords": [
         "framework",
         "laravel",
-        "wordpress"
+        "wordpress",
+        "wordpress-plugin"
     ],
     "license": "MIT",
     "homepage": "http://laravel.com",
@@ -14,8 +15,8 @@
     },
     "authors": [
         {
-            "name": "yaquawa",
-            "email": "yaquawa@gmail.com"
+            "name": "Mohammed Zaki",
+            "email": "mohammedzaki.dev@gmial.com"
         }
     ],
     "require": {
@@ -28,10 +29,10 @@
     },
     "autoload": {
         "files": [
-            "Foundation/helpers.php"
+            "src/Foundation/helpers.php"
         ],
         "psr-4": {
-            "Laraish\\": "./"
+            "LarapressPlugin\\": "src"
         }
     }
 }
