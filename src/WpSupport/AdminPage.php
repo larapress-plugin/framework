@@ -1,6 +1,6 @@
 <?php
 
-namespace Laraish\WpSupport;
+namespace LarapressPlugin\WpSupport;
 
 class AdminPage
 {
